@@ -1,5 +1,5 @@
 from PIL import Image
-from skimage.transform import resize
+from scipy.misc import imresize
 import numpy as np
 from keras.models import load_model
 import tensorflow as tf
@@ -53,7 +53,7 @@ def process_image(image):
     classification = model_prediction(rgbs)
 
     person = classification[:, :, 1]
-    classification = resize(person, (image.height, image.width))
+    classification = imresize(person, (image.height, image.width))
 
     classification[classification > THRESHOLD] = 255
     classification[classification < THRESHOLD] = 0

@@ -1,27 +1,24 @@
 import model_processor
 from PIL import Image
-from io import BytesIO
 from flask import request
 
 
 class Driver:
 
-    def __init__(self):
-        model_processor.prepare()
+    model_processor.prepare()
 
     def handle_file(self):
-
         img = Image.open("test/corgi.jpg")
-        processed = model_processor.convert_input(img)
-        x = model_processor.process_image(processed)
-        print("File processed, uploading to Slack")
-        return x
+        processed_img = model_processor.process_image(img)
+        print("File processed")
+        return processed_img
 
 
 def main():
     driver = Driver()
     res = driver.handle_file()
-    print(res)
+    res.save('test/test.png')  # Rename
+    res.show()  # Remove this if image won't be displayed in IDE
 
 
 if __name__ == '__main__':
