@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, redirect, url_for, send_from_directory, send_file
+from flask import Flask, request, redirect, url_for, send_from_directory, send_file, render_template
 from flask_cors import CORS
 import urllib.request
 from PIL import Image
@@ -101,6 +101,9 @@ def upload_files():
     res.save("./output/processed.png")
     return send_file("./output/processed.png", mimetype='image/png')
 
+@app.route('/output/')
+def ouput():
+    return render_template("image.html")
 
 @app.route('/uploads/<filename>')
 def upload(filename):
