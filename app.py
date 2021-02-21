@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, redirect, url_for, send_from_directory
+from flask import Flask, request, redirect, url_for, send_from_directory, send_file
 from flask_cors import CORS
 import urllib.request
 from PIL import Image
@@ -99,7 +99,7 @@ def upload_files():
     urllib.request.urlretrieve(image_url, "uploads/local-filename.jpg")
     res, filename = handle_file()
     res.save("./output/processed.png")
-    return redirect(url_for('index'))
+    return send_file("./output/processed.png", mimetype='image/png')
 
 
 @app.route('/uploads/<filename>')
