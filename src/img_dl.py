@@ -14,7 +14,7 @@ def ensure_dir(file_path):
     if not os.path.exists(directory):
         os.makedirs(directory)
 
-    
+
 # This code downloads the image.
 def download_image(image_url: str):
     filename = image_url.split("/")[-1]
