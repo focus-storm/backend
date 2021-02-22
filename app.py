@@ -32,11 +32,6 @@ def model_prediction(image):
 
 
 def convert_input(image):
-    """
-    Convert image to values that can be used with trained model.
-    :param image: an Image
-    :return: Matrix of values between 0 - 1
-    """
     image = image.resize(DEFAULT_INPUT_SIZE)
     return np.array(image) / 255.0
 

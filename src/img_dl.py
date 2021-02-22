@@ -8,10 +8,13 @@ import platform
 import sys
 import getopt
 
+
 def ensure_dir(file_path):
     directory = os.path.dirname(file_path)
     if not os.path.exists(directory):
         os.makedirs(directory)
+
+    
 # This code downloads the image.
 def downloadImage(image_url: str):
     filename = image_url.split("/")[-1]
@@ -32,6 +35,7 @@ def downloadImage(image_url: str):
     else:
         print('Image Couldn\'t be retreived')
 
+
 def main():
   URL = str(input("Enter URL of page with images: "))
 
@@ -40,7 +44,6 @@ def main():
     DRIVER_PATH = "/usr/local/bin/chromedriver"
   elif (sys_type == "Windows"):
     DRIVER_PATH = os.path.join(os.getcwd(), "utilities", "chromedriver_win32", "chromedriver.exe")
-
 
   browser = webdriver.Chrome(DRIVER_PATH)
   browser.get(URL)
