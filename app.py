@@ -96,9 +96,11 @@ def upload_files():
     res.save("./output/processed.png")
     return send_file("./output/processed.png", mimetype='image/png')
 
+
 @app.route('/output/')
 def ouput():
     return render_template("image.html")
+
 
 @app.route('/uploads/<filename>')
 def upload(filename):
