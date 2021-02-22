@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, redirect, url_for, send_from_directory
+from flask import Flask, request, redirect, url_for, send_from_directory, send_file, render_template
 from flask_cors import CORS
 import urllib.request
 from PIL import Image
@@ -32,11 +32,6 @@ def model_prediction(image):
 
 
 def convert_input(image):
-    """
-    Convert image to values that can be used with trained model.
-    :param image: an Image
-    :return: Matrix of values between 0 - 1
-    """
     image = image.resize(DEFAULT_INPUT_SIZE)
     return np.array(image) / 255.0
 
@@ -99,7 +94,12 @@ def upload_files():
     urllib.request.urlretrieve(image_url, "uploads/local-filename.jpg")
     res, filename = handle_file()
     res.save("./output/processed.png")
-    return redirect(url_for('index'))
+    return send_file("./output/processed.png", mimetype='image/png')
+
+
+@app.route('/output/')
+def ouput():
+    return render_template("image.html")
 
 
 @app.route('/uploads/<filename>')
